@@ -10,19 +10,27 @@
   </head>
   <body>
     <div>
+      <ul>
+        {% for project in tasks %}
+        <li>{{project.name}}</li>
+        {% for task in project.task_set.all %}
+        <p>- {{task.title}}</p>
+        {% endfor %} {% endfor %}
+      </ul>
+
       {% comment %}
       <ul>
         {% for task in tasks %}
         <li>
           <p>{{task.title}}</p>
-          <span>{{task.status}}</span>
+          <span>{{task.details.priority}}</span>
         </li>
         {% endfor %}
       </ul>
-      {% endcomment %}
+      {% endcomment %} {% comment %}
       <p>{{taskTrue}}</p>
       <p>{{taskFalse}}</p>
-      {% comment %}
+      {% endcomment %} {% comment %}
       <p>{{task3}}</p>
       {% endcomment %}
     </div>

@@ -53,8 +53,14 @@ def view_task(request):
     # tasks = Task.objects.filter(Q(status="PENDING") | Q(status="IN_PROGRESS"))
 
     # Check if data is exits() or not
-    taskTrue = Task.objects.filter(status="PENDING").exists()
-    taskFalse = Task.objects.filter(status="jfsdofjos").exists()
+    # taskTrue = Task.objects.filter(status="PENDING").exists()
+    # taskFalse = Task.objects.filter(status="jfsdofjos").exists()
+
+    # Select * from Task and TaskDetail
+    # tasks = Task.objects.select_related('details').all()
+
+    # For onetomany and manytomany relations
+    tasks = Project.objects.prefetch_related('task_set').all()
 
     # return render(request, "show_task.html", {"tasks": tasks, "task3": task_3})
-    return render(request, "show_task.html", {"taskTrue": taskTrue, "taskFalse": taskFalse})
+    return render(request, "show_task.html", {"tasks": tasks})
