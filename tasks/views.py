@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from tasks.forms import  TaskModelForm
+from tasks.forms import TaskModelForm
+from tasks.models import *
+from datetime import date
 
 # Create your views here.
 
@@ -28,3 +30,20 @@ def create_task(request):
         
     context = {"form": form}
     return render(request, "task_form.html", context)
+
+def view_task(request):
+    # Retrieve all data from task model
+    # tasks = Task.objects.all()
+    # task_3 = Task.objects.get(id=1)
+
+    # Filter data with status
+    # pending_task = Task.objects.filter(status="PENDING")
+
+    # Filter with today's due task
+    # due_date_task = Task.objects.filter(due_date=date.today())
+
+    # Show the task which priority is not low
+    tasks = TaskDetail.objects.exclude(priority="L")
+
+    # return render(request, "show_task.html", {"tasks": tasks, "task3": task_3})
+    return render(request, "show_task.html", {"tasks": tasks})

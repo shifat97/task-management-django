@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% comment %} <link rel="stylesheet" href="{% static "css/output.css" %}" />
+    {% endcomment %}
+  </head>
+  <body>
+    <div>
+      <ul>
+        {% for task in tasks %}
+        <li>
+          <p>{{task.task}}</p>
+          <span>{{task.priority}}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% comment %}
+      <p>{{task3}}</p>
+      {% endcomment %}
+    </div>
+  </body>
+</html>
