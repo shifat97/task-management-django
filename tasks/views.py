@@ -2,6 +2,7 @@ from django.shortcuts import render
 from tasks.forms import TaskModelForm
 from tasks.models import *
 from datetime import date
+from django.db.models import Q
 
 # Create your views here.
 
@@ -43,7 +44,17 @@ def view_task(request):
     # due_date_task = Task.objects.filter(due_date=date.today())
 
     # Show the task which priority is not low
-    tasks = TaskDetail.objects.exclude(priority="L")
+    # tasks = TaskDetail.objects.exclude(priority="L")
+
+    # Show tasks where 'c' word exits and status is PENDING
+    # tasks = Task.objects.filter(title__icontains="c", status="PENDING")
+
+    # Show tasks where status is PENDING or IN_PROGRESS
+    # tasks = Task.objects.filter(Q(status="PENDING") | Q(status="IN_PROGRESS"))
+
+    # Check if data is exits() or not
+    taskTrue = Task.objects.filter(status="PENDING").exists()
+    taskFalse = Task.objects.filter(status="jfsdofjos").exists()
 
     # return render(request, "show_task.html", {"tasks": tasks, "task3": task_3})
-    return render(request, "show_task.html", {"tasks": tasks})
+    return render(request, "show_task.html", {"taskTrue": taskTrue, "taskFalse": taskFalse})

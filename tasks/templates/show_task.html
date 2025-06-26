@@ -10,14 +10,18 @@
   </head>
   <body>
     <div>
+      {% comment %}
       <ul>
         {% for task in tasks %}
         <li>
-          <p>{{task.task}}</p>
-          <span>{{task.priority}}</span>
+          <p>{{task.title}}</p>
+          <span>{{task.status}}</span>
         </li>
         {% endfor %}
       </ul>
+      {% endcomment %}
+      <p>{{taskTrue}}</p>
+      <p>{{taskFalse}}</p>
       {% comment %}
       <p>{{task3}}</p>
       {% endcomment %}
