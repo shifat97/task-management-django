@@ -25,6 +25,11 @@ class StyledFormMixin:
                 field.widget.attrs.update({
                     "class": ""
                 })
+            elif isinstance(field.widget, forms.RadioSelect):
+                field.widget.attrs.update({
+                    "class": "flex gap-4 mt-2"  # Or any classes suitable for your UI
+                })
+
 
 
 class TaskModelForm(StyledFormMixin, forms.ModelForm):

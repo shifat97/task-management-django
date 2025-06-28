@@ -63,11 +63,12 @@ def test(request):
 
 def create_task(request):
     task_form = TaskModelForm() # GET
-    task_detail_form = TaskDetailModelForm()
+    task_detail_form = TaskDetailModelForm() 
 
     if request.method == "POST":
         task_form = TaskModelForm(request.POST) # GET
         task_detail_form = TaskDetailModelForm(request.POST)
+
         if task_form.is_valid() and task_detail_form.is_valid():
             task = task_form.save()
             task_detail = task_detail_form.save(commit=False)
@@ -80,6 +81,71 @@ def create_task(request):
         
     context = {"task_form": task_form, 'task_detail_form': task_detail_form}
     return render(request, "task_form.html", context)
+
+# def update_task(request, id):
+#     task = Task.objects.get(id = id)
+#     task_form = TaskModelForm(instance=task) # GET
+
+#     if task.details:
+#         task_detail_form = TaskDetailModelForm(instance=task.details) 
+
+#     if request.method == "POST":
+#         task_form = TaskModelForm(request.POST) # GET
+#         task_detail_form = TaskDetailModelForm(request.POST, instance=task.details)
+
+#         if task_form.is_valid() and task_detail_form.is_valid():
+#             task_form.save()
+#             task_detail = task_detail_form.save(commit=False)
+#             task_detail.task = task
+#             task_detail.save()
+
+#             messages.success(request, message='Task updated successfully')
+#             print("Priority value:", task.details.priority)
+
+#             return redirect('update-task', id)
+        
+#     context = {"task_form": task_form, 'task_detail_form': task_detail_form}
+#     return render(request, "task_form.html", context)
+
+def update_task(request, id):
+    task = Task.objects.get(id=id)
+    task_form = TaskModelForm(instance=task)
+
+    try:
+        task_detail = task.details
+    except TaskDetail.DoesNotExist:
+        task_detail = None
+
+    task_detail_form = TaskDetailModelForm(instance=task_detail)
+
+    if request.method == "POST":
+        task_form = TaskModelForm(request.POST, instance=task)
+        task_detail_form = TaskDetailModelForm(request.POST, instance=task_detail)
+
+        if task_form.is_valid() and task_detail_form.is_valid():
+            task = task_form.save()
+
+            task_detail = task_detail_form.save(commit=False)
+            task_detail.task = task  # reattach OneToOne
+            task_detail.save()
+
+            messages.success(request, 'Task updated successfully')
+            return redirect('update-task', id)
+
+    context = {"task_form": task_form, "task_detail_form": task_detail_form}
+    return render(request, "task_form.html", context)
+
+def delete_task(request, id):
+    if request.method == "POST":
+        task = Task.objects.get(id=id)
+        task.delete()
+
+        # messages.success(request, 'Task deleted successfully')
+        return redirect('manager-dashboard')
+    else:
+        # messages.error(request, 'Something went wrong!')
+        return redirect('manager-dashboard')
+
 
 def view_task(request):
     # Retrieve all data from task model
