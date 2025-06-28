@@ -1,24 +1,32 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Title</title>
     <link rel="stylesheet" href="{% static "css/output.css" %}">
-</head>
-<body>
+  </head>
+  <body>
     <div class="w-1/2 mx-auto mt-8">
-        <div>
-        {% if message %}
-        	<p>{{ message }}</p>
-        {% endif %}
+      <div>
+        {% if messages %} {% for message in messages %}
+        <div
+          class="px-2 py-1 {% if message.tags == 'success' %} bg-green-200 {% endif %}"
+        >
+          {{ message }}
         </div>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="bg-green-400 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2" type="submit">Submit</button>
-        </form>
+        {% endfor %} {% endif %}
+      </div>
+      <form method="POST">
+        {% csrf_token %} {{ task_form.as_p }} {{ task_detail_form.as_p }}
+        <button
+          class="bg-green-400 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-2"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
     </div>
-</body>
+  </body>
 </html>

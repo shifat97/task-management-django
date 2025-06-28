@@ -13,6 +13,7 @@
           <th class="uppercase text-[#7E7D80]">Priority</th>
           <th class="uppercase text-[#7E7D80]">Team</th>
           <th class="uppercase text-[#7E7D80]">Create At</th>
+          <th class="uppercase text-[#7E7D80]">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -39,6 +40,11 @@
           </td>
           <td class="text-[#A2A2A2] text-sm font-medium">
             {{task.created_at|timesince}}
+          </td>
+          <td>
+            <span class="px-2 py-[1px] rounded-sm bg-[#D9EAFB] text-[#7082A6]"
+              >{{task.get_status_display}}</span
+            >
           </td>
         </tr>
         {% endfor %}

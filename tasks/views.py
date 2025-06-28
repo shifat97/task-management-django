@@ -1,12 +1,15 @@
-from django.shortcuts import render
-from tasks.forms import TaskModelForm
+from django.shortcuts import render, redirect
+from tasks.forms import TaskModelForm, TaskDetailModelForm
 from tasks.models import *
 from datetime import date
 from django.db.models import Q, Count
+from django.contrib import messages
 
 # Create your views here.
 
 def manager_dashboard(request):
+    type = request.GET.get('type', 'all')
+    print(type)
     tasks = Task.objects.select_related('details').prefetch_related('assigned_to').all()
 
     # Getting task count
@@ -29,6 +32,19 @@ def manager_dashboard(request):
         total_pending=Count('id', filter=Q(status="PENDING")),
     )
 
+    # Retriving task data
+
+    BASE_QUERY = Task.objects.select_related('details').prefetch_related('assigned_to')
+
+    if type == 'completed':
+        tasks = BASE_QUERY.filter(status='COMPLETED')
+    elif type == 'in-progress':
+        tasks = BASE_QUERY.filter(status='IN_PROGRESS')
+    elif type == 'pending':
+        tasks = BASE_QUERY.filter(status='PENDING')
+    else:
+        tasks = BASE_QUERY.all()
+
     context = {
         "tasks": tasks,
         "counts": counts
@@ -46,17 +62,23 @@ def test(request):
     return render(request, "test.html", context)
 
 def create_task(request):
-    form = TaskModelForm() # GET
+    task_form = TaskModelForm() # GET
+    task_detail_form = TaskDetailModelForm()
 
     if request.method == "POST":
-        form = TaskModelForm(request.POST)
-        if form.is_valid():
+        task_form = TaskModelForm(request.POST) # GET
+        task_detail_form = TaskDetailModelForm(request.POST)
+        if task_form.is_valid() and task_detail_form.is_valid():
+            task = task_form.save()
+            task_detail = task_detail_form.save(commit=False)
+            task_detail.task = task
+            task_detail.save()
 
-            form.save()
+            messages.success(request, message='Task create successfully')
 
-            return render(request, "task_form.html", {"form": form, "message": "Task Added Successfully"})
+            return redirect('create-task')
         
-    context = {"form": form}
+    context = {"task_form": task_form, 'task_detail_form': task_detail_form}
     return render(request, "task_form.html", context)
 
 def view_task(request):
