@@ -1,14 +1,102 @@
 {% extends "dashboard/dashboard.html" %} {% block title %}
 <title>Manager Dashboard</title>
-{% endblock title %} 
+{% endblock title %} {% block tasks %}
 
-{% block tasks %}
-
-{% comment %} Manager dashboard  {% endcomment %}
-
-<section
-  class="tasks-container mt-8 lg:mt-12 grid gap-4 grid-cols-1 lg:grid-cols-2"
->
-  <h1>Manager Dashboard</h1>
+<section class="tasks-container mt-8">
+  {% comment %} All Task {% endcomment %}
+  <div class="all-task-container p-4 rounde-xl bg-white">
+    <h1 class="text-2xl font-bold">All Tasks</h1>
+    <table class="mt-4 w-full table-auto border-separate border-spacing-y-4">
+      <thead class="text-left">
+        <tr>
+          <th class="uppercase text-[#7E7D80]">Task Title</th>
+          <th class="uppercase text-[#7E7D80]">Priority</th>
+          <th class="uppercase text-[#7E7D80]">Team</th>
+          <th class="uppercase text-[#7E7D80]">Create At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="relative">
+          <td class="flex items-center gap-2">
+            <span
+              class="circle bg-green-300 p-1 rounded-full inline-block"
+            ></span>
+            <p class="text-base font-medium">Test Low Task</p>
+          </td>
+          <td>
+            <span class="px-2 py-[1px] rounded-sm bg-[#D9EAFB] text-[#7082A6]"
+              >Low</span
+            >
+          </td>
+          <td class="absolute bg-red-200">
+            <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
+              >C</span
+            >
+            <span
+              class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
+              >J</span
+            >
+            <span
+              class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
+              >B</span
+            >
+          </td>
+          <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
+        </tr>
+        <tr class="relative">
+          <td class="flex items-center gap-2">
+            <span
+              class="circle bg-yellow-300 p-1 rounded-full inline-block"
+            ></span>
+            <p class="text-base font-medium">Test Task</p>
+          </td>
+          <td>
+            <span class="px-2 py-[1px] rounded-sm bg-[#F0F2F6]">Normal</span>
+          </td>
+          <td class="absolute bg-red-200">
+            <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
+              >C</span
+            >
+            <span
+              class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
+              >J</span
+            >
+            <span
+              class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
+              >B</span
+            >
+          </td>
+          <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
+        </tr>
+        <tr class="relative">
+          <td class="flex items-center gap-2">
+            <span
+              class="circle bg-yellow-300 p-1 rounded-full inline-block"
+            ></span>
+            <p class="text-base font-medium">Test Task</p>
+          </td>
+          <td>
+            <span class="px-2 py-[1px] rounded-sm bg-[#FEE3E3] text-[#A6535D]"
+              >High</span
+            >
+          </td>
+          <td class="absolute bg-red-200">
+            <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
+              >C</span
+            >
+            <span
+              class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
+              >J</span
+            >
+            <span
+              class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
+              >B</span
+            >
+          </td>
+          <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 {% endblock tasks %}
