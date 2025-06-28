@@ -6,7 +6,7 @@
   {% comment %} All Task {% endcomment %}
   <div class="all-task-container p-4 rounde-xl bg-white">
     <h1 class="text-2xl font-bold">All Tasks</h1>
-    <table class="mt-4 w-full table-auto border-separate border-spacing-y-4">
+    <table class="mt-4 w-full table-fixed border-separate border-spacing-y-4">
       <thead class="text-left">
         <tr>
           <th class="uppercase text-[#7E7D80]">Task Title</th>
@@ -16,87 +16,83 @@
         </tr>
       </thead>
       <tbody>
+        {% for task in tasks %}
         <tr class="relative">
           <td class="flex items-center gap-2">
             <span
               class="circle bg-green-300 p-1 rounded-full inline-block"
             ></span>
-            <p class="text-base font-medium">Test Low Task</p>
+            <p class="text-base font-medium mr-6">{{task.title}}</p>
           </td>
           <td>
             <span class="px-2 py-[1px] rounded-sm bg-[#D9EAFB] text-[#7082A6]"
-              >Low</span
+              >{{task.details.get_priority_display}}</span
             >
           </td>
-          <td class="absolute bg-red-200">
-            <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
-              >C</span
-            >
+          <td class="flex -space-x-2">
+            {% for emp in task.assigned_to.all %}
             <span
-              class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
-              >J</span
+              class="w-8 h-8 flex items-center justify-center bg-[#3D82F4] rounded-full text-white"
+              >{{emp.name|slice:':1'}}</span
             >
-            <span
-              class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
-              >B</span
-            >
+            {% endfor %}
           </td>
-          <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
+          <td class="text-[#A2A2A2] text-sm font-medium">
+            {{task.created_at|timesince}}
+          </td>
         </tr>
-        <tr class="relative">
-          <td class="flex items-center gap-2">
-            <span
-              class="circle bg-yellow-300 p-1 rounded-full inline-block"
-            ></span>
-            <p class="text-base font-medium">Test Task</p>
-          </td>
-          <td>
-            <span class="px-2 py-[1px] rounded-sm bg-[#F0F2F6]">Normal</span>
-          </td>
-          <td class="absolute bg-red-200">
-            <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
-              >C</span
-            >
-            <span
-              class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
-              >J</span
-            >
-            <span
-              class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
-              >B</span
-            >
-          </td>
-          <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
-        </tr>
-        <tr class="relative">
-          <td class="flex items-center gap-2">
-            <span
-              class="circle bg-yellow-300 p-1 rounded-full inline-block"
-            ></span>
-            <p class="text-base font-medium">Test Task</p>
-          </td>
-          <td>
-            <span class="px-2 py-[1px] rounded-sm bg-[#FEE3E3] text-[#A6535D]"
-              >High</span
-            >
-          </td>
-          <td class="absolute bg-red-200">
-            <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
-              >C</span
-            >
-            <span
-              class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
-              >J</span
-            >
-            <span
-              class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
-              >B</span
-            >
-          </td>
-          <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
 </section>
-{% endblock tasks %}
+{% endblock tasks %} {% comment %}
+<tr class="relative">
+  <td class="flex items-center gap-2">
+    <span class="circle bg-yellow-300 p-1 rounded-full inline-block"></span>
+    <p class="text-base font-medium">Test Task</p>
+  </td>
+  <td>
+    <span class="px-2 py-[1px] rounded-sm bg-[#F0F2F6]">Normal</span>
+  </td>
+  <td class="absolute bg-red-200">
+    <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
+      >C</span
+    >
+    <span
+      class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
+      >J</span
+    >
+    <span
+      class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
+      >B</span
+    >
+  </td>
+  <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
+</tr>
+<tr class="relative">
+  <td class="flex items-center gap-2">
+    <span class="circle bg-yellow-300 p-1 rounded-full inline-block"></span>
+    <p class="text-base font-medium">Test Task</p>
+  </td>
+  <td>
+    <span class="px-2 py-[1px] rounded-sm bg-[#FEE3E3] text-[#A6535D]"
+      >High</span
+    >
+  </td>
+  <td class="absolute bg-red-200">
+    <span class="px-[5px] bg-[#3D82F4] rounded-full text-white absolute"
+      >C</span
+    >
+    <span
+      class="px-[5px] bg-[#1FC45F] rounded-full text-white absolute left-4 z-[1]"
+      >J</span
+    >
+    <span
+      class="px-[5px] bg-[#F34343] rounded-full text-white absolute left-8 z-[2]"
+      >B</span
+    >
+  </td>
+  <td class="text-[#A2A2A2] text-sm font-medium">9 Months ago</td>
+</tr>
+{% endcomment %}
