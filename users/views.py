@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from users.forms import RegisterForm, CustomRegistrationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 
 
 def sign_up(request):
@@ -13,15 +14,13 @@ def sign_up(request):
         form = CustomRegistrationForm(request.POST)
         
         if form.is_valid():
-            # username = form.cleaned_data.get('username')
-            # password = form.cleaned_data.get('password1')
-            # confirm_password = form.cleaned_data.get('password2')
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_date.get('password'))
+            user.is_active = False
+            user.save()
 
-            # if password == confirm_password:
-            #     User.objects.create(username=username, password=password)
-            # else:
-            #     print('Password are not same')
-            form.save()
+            messages.success(request, 'A confirmation mail sent, Please check your email')
+            return redirect('sign-in')
 
     return render(request, 'registration/register.html', context={
         "form": form
