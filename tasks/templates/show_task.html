@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    {% comment %} <link rel="stylesheet" href="{% static "css/output.css" %}" />
+    {% endcomment %}
+  </head>
+  <body>
+    <div>
+      <ul>
+        {% for project in tasks %}
+        <li>{{project.name}}</li>
+        {% for task in project.task_set.all %}
+        <p>- {{task.title}}</p>
+        {% endfor %} {% endfor %}
+      </ul>
+
+      {% comment %}
+      <ul>
+        {% for task in tasks %}
+        <li>
+          <p>{{task.title}}</p>
+          <span>{{task.details.priority}}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endcomment %} {% comment %}
+      <p>{{taskTrue}}</p>
+      <p>{{taskFalse}}</p>
+      {% endcomment %} {% comment %}
+      <p>{{task3}}</p>
+      {% endcomment %}
+    </div>
+  </body>
+</html>

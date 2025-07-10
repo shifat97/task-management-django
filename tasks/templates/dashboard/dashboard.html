@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block title %}{% endblock title %}
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+      * {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="w-screen h-screen bg-[#FAFAFC]">
+    <section class="body-container px-4 py-1 lg:px-8 lg:py-2">
+      <!-- Header -->
+      <header class="flex items-center justify-between">
+        <!-- Logo -->
+        <section class="logo-container">
+          <span class="text-[28px] lg:text-[40px] font-bold">Dashboard</span>
+        </section>
+        <!-- Notification and Profile -->
+        <section class="np-container flex gap-4 items-center">
+          <!-- Notification Icons -->
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+              />
+            </svg>
+          </span>
+          <!-- Profile Button -->
+          <div>
+            <span class="px-3 py-2 bg-[#3D82F4] rounded-full text-white"
+              >B</span
+            >
+          </div>
+        </section>
+      </header>
+      <!-- Main -->
+      <main class="mt-4 lg:mt-8">
+        <!-- Task Count and Progress -->
+        <section
+          class="task-cp-container grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+        >
+          <!-- Total Task -->
+          <div class="total-task-container bg-white p-4 rounded-xl shadow-xs">
+            <h4 class="uppercase text-[#828284] text-sm font-medium">
+              Total Task
+            </h4>
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold">3</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.9"
+                stroke="currentColor"
+                class="size-10 bg-[#DBE9FC] rounded-full p-2 stroke-[#456AC1]"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
+                />
+              </svg>
+            </div>
+            <p class="text-[#828284] text-sm lg:text-base font-medium">
+              11 Last Month
+            </p>
+          </div>
+          <!-- Completed Task -->
+          <div
+            class="completed-task-container bg-white p-4 rounded-xl shadow-xs"
+          >
+            <h4 class="uppercase text-[#828284] text-sm font-medium">
+              Complete Task
+            </h4>
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold">1</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-10 bg-[#DFFBE6] rounded-full p-2 stroke-[#3B9C62]"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </div>
+            <p class="text-[#828284] text-sm lg:text-base font-medium">
+              11 Last Month
+            </p>
+          </div>
+          <!-- Task in Progress -->
+          <div class="progress-container bg-white p-4 rounded-xl shadow-xs">
+            <h4 class="uppercase text-[#828284] text-sm font-medium">
+              Task in Progress
+            </h4>
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold">1</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-10 bg-[#FDFAC6] rounded-full p-2 stroke-[#BA932C]"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </div>
+            <p class="text-[#828284] text-sm lg:text-base font-medium">
+              11 Last Month
+            </p>
+          </div>
+          <!-- Todos -->
+          <div class="todo-container bg-white p-4 rounded-xl shadow-xs">
+            <h4 class="uppercase text-[#828284] text-sm font-medium">Todos</h4>
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold">1</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.9"
+                stroke="currentColor"
+                class="size-10 bg-[#F2E9FB] rounded-full p-2 stroke-[#905AD0]"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
+                />
+              </svg>
+            </div>
+            <p class="text-[#828284] text-sm lg:text-base font-medium">
+              11 Last Month
+            </p>
+          </div>
+        </section>
+
+        {% block tasks %} {% endblock tasks %}
+      </main>
+      {% include "footer.html" %}
+    </section>
+  </body>
+</html>
